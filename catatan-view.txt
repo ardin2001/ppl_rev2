@@ -1,0 +1,35 @@
+yang sudah dibuat dari ejs :
+- login-user
+- main-user
+- order-admin-view
+- produk-admin-create
+- produk-admin-update
+- produk-admin-view
+
+yang belum dibuat dari ejs :
+- produk-admin-create
+
+
+
+//query
+app.get('/edit/:id',(req,res) =>{
+    Produk.findOne({where:{id:req.params.id}}).then(result =>{
+        res.render('edit',{Produk:result})
+    })
+})
+app.get('/create-transaksi/:id',(req,res) =>{
+    Produk.findOne({where:{id:req.params.id}}).then(result =>{
+        res.render('create-transaksi',{Produk:result})
+    })
+})
+
+app.get('/create-produk/:id',(req,res) =>{
+    Produk.findOne({where:{id:req.params.id}}).then(result =>{
+        res.render('edit',{Produk:result})
+    })
+})
+// app.get('/',(req,res) =>{
+//     Transaksi.findAll().then((result) =>{
+//         res.render('view-transaksi',{Transaksi:result})
+//     })    
+// })

@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="/createproduk" class="btn btn-success">Tambah Produk</a>
+        <a href="/admin/produk/createproduk" class="btn btn-success">Tambah Produk</a>
         <table class="table">
             <thead>
               <tr>
@@ -28,9 +28,9 @@
                         <th><%= e.nama_barang %> </th>
                         <td><%= e.deskripsi %> </td>
                         <td><%= e.harga %> </td>
-                        <td><img src="img/<%= e.gambar %>" width="60px" height="60px"></td>
+                        <td><img src="../img/<%= e.gambar %>" width="60px" height="60px"></td>
                         <td>
-                            <a href="/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
+                            <a href="/admin/produk/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
                             <button onclick= <%= "del("+e.id_barang+")" %>  type="button" class="btn btn-danger" >Delete</button>
                         </td>
                     </tr>
@@ -42,7 +42,7 @@
     <script>
         const del = (id) =>{
             alert('Are you delete id : ' +id)
-            axios.delete('/api/produk/'+id).then(result =>{
+            axios.delete('/admin/api/produk/'+id).then(result =>{
                 alert('info status : '+ result.status)
                 location.reload()
             }).catch(err =>{

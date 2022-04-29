@@ -1,5 +1,5 @@
 import {sequelize,DataTypes} from "./model.js";
-import Produk from "./product.js";
+import Produk from "./produk.js";
 import User from "./user.js";
 const Transaksi = sequelize.define('transaksi',{
     id_transaksi : {type : DataTypes.INTEGER,primaryKey : true,autoIncrement : true},

@@ -28,6 +28,7 @@
             </div>
             
             <button type="submit" class="btn btn-primary" id="submit" onclick="create()">Submit</button>
+            <a href="/admin/produk" class="btn btn-primary">Back</a>
           </form>
 
           <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -35,7 +36,7 @@
             const create = () =>{
               axios({
                 method : 'post',
-                url : '/api/produk',
+                url : '/admin/api/produk',
                 data :{
                   nama_barang : document.getElementById("name").value,
                   deskripsi : document.getElementById("deskripsi").value,
@@ -43,12 +44,8 @@
                   gambar : document.getElementById("image").value.replace("C:\\fakepath\\", "")
                 }
               }).then(result =>{
-                alert('info status: '+result.status)
-                window.location = "http://127.0.0.1:3000/viewproduk";
-              }).catch(err =>{
-                alert('error :'+err)
-                window.location = "/"
-              });
+                window.location = "http://127.0.0.1:3000/admin/produk";
+              })
             }
           </script>
     </div>

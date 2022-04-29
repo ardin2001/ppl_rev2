@@ -10,7 +10,6 @@ const logout = (req,res,next) =>{
     req.session.destroy();
     res.redirect('/login');
 }
-
 const auth = (req,res,next) =>{
     const data ={
         username : req.body.name,

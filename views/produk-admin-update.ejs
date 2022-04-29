@@ -35,7 +35,7 @@
             const edit = id =>{
               axios({ 
                 method : 'put',
-                url : '/api/produk/'+id,
+                url : '/admin/api/produk/'+id,
                 data :{
                   nama_barang : document.getElementById("name").value,
                   deskripsi : document.getElementById("deskripsi").value,
@@ -43,8 +43,7 @@
                   gambar : document.getElementById("image").value.replace("C:\\fakepath\\", "")
                 }
               }).then(result =>{
-                alert('info status: '+result.status)
-                window.location = "/viewproduk";
+                window.location = "/admin/produk";
               }).catch(err =>{
                 alert('error :'+err)
                 window.location = "/"

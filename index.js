@@ -1,12 +1,14 @@
 import express from 'express';
 import { sequelize } from './models/model.js';
 import session from 'express-session';
-import Produk from './models/product.js';
+import Produk from './models/produk.js';
 import User from './models/user.js';
 import Order from './models/order.js';
 import mc from './controllers/user.js';
 import mysql2 from 'mysql2';
 import Transaksi from './models/transaksi.js';
+import root_router from './routers/root.js';
+import admin_router from './routers/admin.js';
 
 const app = express();
 const hostname ='127.0.0.1';
@@ -31,33 +33,9 @@ app.use(session({
     }
 }))
 app.set('view engine','ejs')
+app.use('/',root_router);
+app.use('/admin',admin_router);
 
-app.get('/createtable',(req,res) =>{
-    Transaksi.sync();
-    res.end('table transaksi berhasil dibuat')
-})
-
-
-app.get('/',(req,res) =>{
-    res.send('login dlu');
-});
-
-//create produk
-app.get('/createproduk',(req,res) =>{
-    res.render('produk-admin-create');
-});
-//read produk
-app.get('/viewproduk',(req,res) =>{
-    Produk.findAll().then((result) =>{
-        res.render('produk-admin-view',{Produk:result})
-    })    
-})
-//update produk
-app.get('/edit/:id',(req,res) =>{
-    Produk.findOne({where:{id_barang:req.params.id}}).then(result =>{
-        res.render('produk-admin-update',{Produk:result})
-    })
-})
 //update produk
 app.get('/getproduk/:id',(req,res) =>{
     Produk.findOne({where:{id_barang:req.params.id}}).then(result =>{
@@ -109,13 +87,7 @@ app.get('/order/user/:id',(req,res) =>{
     });
 })
 
-
-
 // operasi crud //
-//auth-session
-app.get('/login', mc.login);
-app.get('/logout', mc.logout);
-app.post('/login', mc.auth);
 app.get('/user', (req,res) =>{
     Produk.findAll().then((result) =>{
         res.render('main-user',{Produk:result, user : req.session.user || ""})
@@ -133,15 +105,6 @@ app.post('/api/transaksi',(req,res) =>{
     }).then((result) => res.json(result));
 })
 
-//post product
-app.post('/api/produk',(req,res) =>{
-    Produk.create({
-        nama_barang : req.body.nama_barang,
-        deskripsi : req.body.deskripsi,
-        harga : req.body.harga,
-        gambar : req.body.gambar
-    }).then((result) => res.json(result));
-})
 //post order
 app.post('/api/order',(req,res) =>{
     Order.create({
@@ -151,25 +114,6 @@ app.post('/api/order',(req,res) =>{
         total : req.body.jumlah*req.body.harga,
         info : req.body.info
     }).then((result) => res.json(result));
-})
-//update
-app.put('/api/produk/:id',(req,res) =>{
-    Produk.update({
-        nama_barang : req.body.nama_barang,
-        deskripsi : req.body.deskripsi,
-        harga : req.body.harga,
-        gambar : req.body.gambar
-    },{where :{id_barang : req.params.id}}
-    ).then(result =>{
-        res.json(result)
-    })
-})
-//delete
-app.delete('/api/produk/:id',(req,res) =>{
-    Produk.destroy({where:{id_barang : req.params.id}}
-    ).then(result => {
-        res.json(result)
-    });
 })
 //delete order
 app.delete('/api/order/:id',(req,res) =>{

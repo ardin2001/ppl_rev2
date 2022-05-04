@@ -1,0 +1,88 @@
+.navbar-brand{
+    color:  #466deb !important;
+    font-weight: bold;
+    
+    
+}
+.workingspace {
+    margin-top: 70px;
+   
+}
+
+.workingspace h3{
+    font-size: 45px;
+    font-weight: normal;
+   
+}
+
+.workingspace span{
+    color: blue;
+}
+
+.workingspace p{
+    color: grey;
+    font-size: 15px;
+}
+
+.tombols{
+    margin-top: 40px;
+}
+
+/* info panel */
+.info-panel{
+    margin-top:50px;
+    padding:30px;
+}
+
+.info-panel h5{
+    margin-top: 20px;
+
+}
+.info-panel p{
+    color: #a8aaad;
+}
+
+.container p{
+    color: #a8aaad;
+}
+
+.container img{
+    width:400px;
+}
+#imgset{
+    width:400px;
+    height: 350px;
+}
+
+.download{
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: auto;
+    
+ 
+}
+
+.container a{
+    text-align: center;
+    margin-bottom: 30px;
+   
+}
+
+
+.downloads{
+    margin-top: 30px;
+    
+}
+
+.downloads p{
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+/* slider  */
+.carousel-inner  {
+    border-radius: 15px;
+    margin-top: 30px;
+    box-sizing: unset;
+
+}

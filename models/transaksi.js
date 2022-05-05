@@ -6,7 +6,6 @@ const Transaksi = sequelize.define('transaksi',{
     id_barang : DataTypes.INTEGER,
     id_user : DataTypes.INTEGER,
     jumlah : DataTypes.INTEGER,
-    total : DataTypes.INTEGER,
     info : DataTypes.STRING
 });
 Produk.hasMany(Transaksi,{foreignKey : 'id_barang'});

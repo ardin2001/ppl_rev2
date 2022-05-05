@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,6 @@
             </ul>
             
             <form class="d-flex">
-              <p id="iduser"><%= user.id_user %></p>
-              <p id="idproduk"><%= Produk.id_barang %></p>
               <p ><%= user.nama_pembeli %></p>
               <button class="btn btn-success" type="submit"><a href="/logout">Logout</a></button>
             </form>

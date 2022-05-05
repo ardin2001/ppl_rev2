@@ -4,8 +4,8 @@ const User = sequelize.define('user',{
     username : DataTypes.STRING,
     password : DataTypes.STRING,
     nama_pembeli : DataTypes.STRING,
-    jk : DataTypes.STRING,
     no_telp : DataTypes.STRING,
+    email : DataTypes.STRING,
     alamat : DataTypes.STRING
 });
 export default User;

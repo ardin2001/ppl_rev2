@@ -3,8 +3,7 @@ const Admin = sequelize.define('admin',{
     id_admin : {type : DataTypes.INTEGER,primaryKey : true,autoIncrement : true},
     username : DataTypes.STRING,
     password : DataTypes.STRING,
-    nama_pembeli : DataTypes.STRING,
-    jk : DataTypes.STRING,
+    nama_admin : DataTypes.STRING,
     no_telp : DataTypes.STRING,
     alamat : DataTypes.STRING
 });

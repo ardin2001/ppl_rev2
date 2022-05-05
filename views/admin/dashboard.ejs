@@ -54,35 +54,8 @@
                 </div>
             </div>
         </div>
-        <a href="/admin/produk/create" class="btn btn-primary" style="margin-top: 5px;margin-bottom: 10px;">Tambah Produk</a>
+        <h3>Dashboard</h3>
         <p id="user" style="display: none;"><%= user.nama_admin %></p>
-        <table class="table table-bordered border-dark table-hover bg">
-            <thead class="bg-light">
-              <tr>
-                <th scope="col">id</th>
-                <th scope="col">Nama Barang</th>
-                <th scope="col">Deskripsi</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Gambar</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                <% Produk.forEach(e => { %>
-                    <tr>
-                        <td><%= e.id_barang %> </td>
-                        <th><%= e.nama_barang %> </th>
-                        <td><%= e.deskripsi %> </td>
-                        <td><%= e.harga %> </td>
-                        <td><img src="../img/<%= e.gambar %>" width="60px" height="60px"></td>
-                        <td>
-                            <a href="/admin/produk/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
-                            <button onclick= <%= "del("+e.id_barang+")" %>  type="button" class="btn btn-danger" >Delete</button>
-                        </td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -103,7 +76,7 @@
     toggleButton.onclick = function () {
         el.classList.toggle("toggled");
     };
-    const change = document.getElementById('title').innerHTML = "Produk";
+    const change = document.getElementById('title').innerHTML = "Dashboard";
     const change2 = document.getElementById('navbarDropdown').innerHTML = document.getElementById('user').innerHTML;
 </script>
 </html>

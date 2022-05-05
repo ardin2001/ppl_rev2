@@ -6,7 +6,6 @@ const Order = sequelize.define('order',{
     id_barang : DataTypes.INTEGER,
     id_user : DataTypes.INTEGER,
     jumlah : DataTypes.INTEGER,
-    total : DataTypes.INTEGER,
     info : DataTypes.STRING
 });
 Produk.hasMany(Order,{foreignKey : 'id_barang'});

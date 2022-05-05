@@ -8,7 +8,7 @@ const conn = mysql2.createConnection({
 });
 
 const order = (req,res) =>{  
-    const sql = "select o.id_order,o.id_user,o.jumlah,o.total,o.info,p.id_barang,p.nama_barang,p.harga,o.updatedAt from orders o join produks p on o.id_barang = p.id_barang";
+    const sql = `select o.id_order,o.id_user,o.jumlah,o.info,p.id_barang,p.nama_barang,p.harga,o.updatedAt from orders o join produks p on o.id_barang = p.id_barang where o.id_user=${req.params.id}`;
     const query = conn.query(sql,(err,result) =>{
         if(err){
             res.end("query is fault");

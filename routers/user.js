@@ -23,6 +23,8 @@ router.use('/order',user_order_router);
 router.use('/create',user_order_router);
 
 // ======= api user ========== //
+
+//=== api register ===//
 router.post('/api/register',(req,res) =>{
     User.create({
         username : req.body.username,
@@ -33,6 +35,7 @@ router.post('/api/register',(req,res) =>{
         alamat : req.body.alamat
     }).then((result) => res.redirect('/user/login'));
 })
+//=== api order ===//
 router.post('/api/order',(req,res) =>{
     Order.create({
         id_barang : req.body.id_barang,

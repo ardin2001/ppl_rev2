@@ -12,7 +12,6 @@
 <body>
     <%- include('../template/nav.ejs') %>
     <div class="container-fluid px-4">
-        <p id="user" style="display: none;"><%= user.nama_admin %></p>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
@@ -42,17 +41,7 @@
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const del = (id) =>{
-        alert('Are you delete id : ' +id)
-        axios.delete('/admin/api/produk/'+id).then(result =>{
-            alert('info status : '+ result.status)
-            location.reload()
-        }).catch(err =>{
-            alert('error : '+err)
-        })
-    }
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
 
@@ -60,6 +49,5 @@
         el.classList.toggle("toggled");
     };
     const change = document.getElementById('title').innerHTML = "Account User";
-    const change2 = document.getElementById('navbarDropdown').innerHTML = document.getElementById('user').innerHTML;
 </script>
 </html>

@@ -11,28 +11,27 @@
 </head>
 <body>
     <%- include('../template/nav.ejs') %>
-    <p id="user" style="display: none;"><%= user.nama_admin %></p>
     <div class="d-flex justify-content-center">
       <div class="d-flex justify-content-center bg-light col-3.5" style="padding: 20px; border-radius: 2%;">
-        <form>
+        <form action="/admin/api/produk" method="post">
           <div class="mb-4">
             <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-            <input type="text" class="form-control" id="name">
+            <input type="text" class="form-control" id="name" name="barang">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" id="deskripsi">
+            <input type="text" class="form-control" id="deskripsi" name="deskripsi">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">harga</label>
-            <input type="number" class="form-control" id="harga">
+            <input type="number" class="form-control" id="harga" name="harga">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="image">
+            <input type="file" class="form-control" id="image" name="gambar">
           </div>
           
-          <button type="submit" class="btn btn-primary" id="submit" onclick="create()">Submit</button>
+          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
         </form>
       </div>
     </div>
@@ -40,26 +39,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  const create = () =>{
-    axios({
-      method : 'post',
-      url : '/admin/api/produk',
-      data :{
-        nama_barang : document.getElementById("name").value,
-        deskripsi : document.getElementById("deskripsi").value,
-        harga : document.getElementById("harga").value,                 
-        gambar : document.getElementById("image").value.replace("C:\\fakepath\\", "")
-      }
-    }).then(result =>{
-      window.location = "http://127.0.0.1:3000/admin/produk";
-    })
-  }
   var el = document.getElementById("wrapper");
   var toggleButton = document.getElementById("menu-toggle");
   toggleButton.onclick = function () {
     el.classList.toggle("toggled");
   };
   const change = document.getElementById('title').innerHTML = "Produk";
-  const change2 = document.getElementById('navbarDropdown').innerHTML = document.getElementById('user').innerHTML;
 </script>
 </html>

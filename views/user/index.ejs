@@ -13,48 +13,21 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/user/order/orderview/<%= user.id_user %> ">Order</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
-            
-            <form class="d-flex">
-                <p ><%= user.nama_pembeli %></p>
-                <button class="btn btn-danger" type="submit"><a href="/user/logout" style="color: black;">Logout</a></button>
-            </form>
-          </div>
+  <%- include('../template/nav_user.ejs') %>
+  <div class="row d-flex justify-content-evenly">
+    <% Produk.forEach(e => { %>
+      <div class="card" style="width: 16rem; padding: 15px; margin: 3px;">
+        <img src="../../img/<%=e.gambar %> " class="card-img-top" width="200px" height="200px">
+        <div class="card-body">
+          <h5 class="card-title"><%= e.nama_barang %></h5>
+          <p class="card-text"><%= e.deskripsi %></p>
         </div>
-      </nav>
-    <div class="container"  style="margin-top: 40px;">
-      <div class="row d-flex justify-content-evenly">
-        <% Produk.forEach(e => { %>
-          <div class="card" style="width: 16rem; padding: 15px; margin: 3px;">
-            <img src="../../img/<%=e.gambar %> " class="card-img-top" width="200px" height="200px">
-            <div class="card-body">
-              <h5 class="card-title"><%= e.nama_barang %></h5>
-              <p class="card-text"><%= e.deskripsi %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Harga : Rp. <%= e.harga %></li>
-            </ul>
-            <a href="/user/create/order/<%= e.id_barang %> " class="btn btn-primary">Order</a>
-          </div>             
-        <% }) %>
-      </div>
-    </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Harga : Rp. <%= e.harga %></li>
+        </ul>
+        <a href="/user/create/order/<%= e.id_barang %> " class="btn btn-primary">Order</a>
+      </div>             
+    <% }) %>
+  </div>
   </body>
 </html>

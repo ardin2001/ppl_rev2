@@ -54,14 +54,14 @@
                 </div>
             </div>
         </div>
-        <p id="user" style="display: none;"><%= user.nama_admin %></p>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">id_user</th>
-                <th scope="col">id_barang</th>
-                <th scope="col">Barang</th>
+                <th scope="col">Nama Pembeli</th>
+                <th scope="col">No Telp</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">Nama Barang</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">Total</th>
@@ -74,8 +74,9 @@
                 <% Order.forEach(e => { %>
                     <tr>
                         <td><%= e.id_order %> </td>
-                        <td><%= e.id_user %> </td>
-                        <td><%= e.id_barang %> </td>
+                        <td><%= e.nama_pembeli %> </td>
+                        <td><%= e.no_telp %> </td>
+                        <td><%= e.alamat %> </td>
                         <td><%= e.nama_barang %> </td>
                         <td><%= e.harga %> </td>
                         <td><%= e.jumlah %> </td>
@@ -84,7 +85,6 @@
                         <td ><%= e.updatedAt.toLocaleDateString() %> </td>
                         <td>
                             <button onclick= <%= "del("+e.id_order+")" %>  type="button" class="btn btn-danger">Tolak</button>
-                            
                             <button onclick= <%= "create("+[e.id_order,e.id_user,e.id_barang,e.jumlah,e.harga,"'"+e.info+"'"]+")" %>  type="button" class="btn btn-success" >Terima</button>                            
                         </td>
                     </tr>
@@ -137,6 +137,5 @@
             el.classList.toggle("toggled");
         };
         const change = document.getElementById('title').innerHTML = "Order";
-        const change2 = document.getElementById('navbarDropdown').innerHTML = document.getElementById('user').innerHTML;
 </script>
 </html>

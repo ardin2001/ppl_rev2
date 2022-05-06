@@ -13,51 +13,29 @@
     <title>Order</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="margin-bottom: 30px;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/order/user/<%= user.id_user %> ">Order</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
-            
-            <form class="d-flex">
-                <p ><%= user.nama_pembeli %></p>
-                <button class="btn btn-success" type="submit"><a href="/logout">Logout</a></button>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <main>
-        <% Order.forEach(e => { %>
-          <div class="d-flex justify-content-center">
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= e.nama_barang %> </h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  </div>
+  <%- include('../template/nav_user.ejs') %>
+  <main>
+    <% Order.forEach(e => { %>
+      <div class="d-flex justify-content-center">
+        <div class="card mb-2" style="max-width: 560px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="../../../img/<%=e.gambar %>" class="img-fluid rounded-start" alt="..." style="width: 380px;height: 180px;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= e.nama_barang %> </h5>
+                <div style="margin: 0px;">
+                  <span class="card-text">Jumlah Barang : <%= e.jumlah %> </span><br>
+                  <span class="card-text">Harga Barang : <%= e.harga %> </span><br>
+                  <span class="card-text">Total Harga : <%= e.jumlah*e.harga %> </span><br>
                 </div>
               </div>
             </div>
-          </div>             
-        <% }) %>
-      </main>
+          </div>
+        </div>
+      </div>             
+    <% }) %>
+  </main>
   </body>
 </html>

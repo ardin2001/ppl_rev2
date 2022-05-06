@@ -55,7 +55,6 @@
             </div>
         </div>
         <a href="/admin/produk/create" class="btn btn-primary" style="margin-top: 5px;margin-bottom: 10px;">Tambah Produk</a>
-        <p id="user" style="display: none;"><%= user.nama_admin %></p>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
@@ -77,7 +76,7 @@
                         <td><img src="../img/<%= e.gambar %>" width="60px" height="60px"></td>
                         <td>
                             <a href="/admin/produk/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
-                            <button onclick= <%= "del("+e.id_barang+")" %>  type="button" class="btn btn-danger" >Delete</button>
+                            <a href="/admin/api/produk/delete/<%= e.id_barang %> " class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <% }) %>
@@ -88,15 +87,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const del = (id) =>{
-        alert('Are you delete id : ' +id)
-        axios.delete('/admin/api/produk/'+id).then(result =>{
-            alert('info status : '+ result.status)
-            location.reload()
-        }).catch(err =>{
-            alert('error : '+err)
-        })
-    }
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
 
@@ -104,6 +94,5 @@
         el.classList.toggle("toggled");
     };
     const change = document.getElementById('title').innerHTML = "Produk";
-    const change2 = document.getElementById('navbarDropdown').innerHTML = document.getElementById('user').innerHTML;
 </script>
 </html>

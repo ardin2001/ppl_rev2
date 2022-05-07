@@ -6,6 +6,7 @@ import User from '../models/user.js';
 import mc from '../controllers/user.js';
 import user_produk_router from './user/produk.js';
 import user_order_router from './user/order.js';
+import user_transaksi_router from './user/transaksi.js';
 import mysql2 from 'mysql2';
 const conn = mysql2.createConnection({
     host : 'localhost',
@@ -21,6 +22,7 @@ router.post('/login', mc.auth);
 router.use('/produk',user_produk_router);
 router.use('/order',user_order_router);
 router.use('/create',user_order_router);
+router.use('/transaksi',user_transaksi_router);
 
 // ======= api user ========== //
 
@@ -44,6 +46,13 @@ router.post('/api/order',(req,res) =>{
         total : req.body.jumlah*req.body.harga,
         info : req.body.info
     }).then((result) => res.json(result));
+})
+//=== api order ===//
+router.get('/api/order/:id',(req,res) =>{
+    Order.destroy({where:{id_order : req.params.id}}
+    ).then(result => {
+        res.redirect(`/user/produk`)
+    });
 })
 
 export default router;

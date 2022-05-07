@@ -2,7 +2,7 @@ import express from 'express';
 import order_user from '../../controllers/order_user.js';
 const router = express.Router();
 
-router.get('/orderview/:id',order_user.order);
+router.get('/:id',order_user.order);
 router.get('/order/:id',order_user.create);
 
 export default router;

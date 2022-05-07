@@ -15,7 +15,7 @@
 <body>
   <%- include('../template/nav_user.ejs') %>
   <main>
-    <% Order.forEach(e => { %>
+    <% Transaksi.forEach(e => { %>
       <div class="d-flex justify-content-center">
         <div class="card mb-2" style="max-width: 650px;">
           <div class="row g-0">
@@ -31,8 +31,7 @@
                   <span class="card-text">Total Harga   : <%= e.jumlah*e.harga %> </span><br>
                   <span class="card-text">Nama Pembeli  : <%= e.nama_pembeli %> </span><br>
                   <span class="card-text">Alamat        : <%= e.alamat %> </span><br>
-                </div>                
-                <a href="/user/api/order/<%= e.id_order %> " class="btn btn-danger" style="margin-top: 10px;">Batal Transaksi</a>
+                </div>
               </div>
             </div>
           </div>

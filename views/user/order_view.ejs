@@ -31,6 +31,7 @@
                   <span class="card-text">Total Harga   : <%= e.jumlah*e.harga %> </span><br>
                   <span class="card-text">Nama Pembeli  : <%= e.nama_pembeli %> </span><br>
                   <span class="card-text">Alamat        : <%= e.alamat %> </span><br>
+                  <span class="card-text">Bukti Pembayaran : <a href="/user/order/image/<%= e.id_order %> ">Klik</a> </span><br>
                 </div>                
                 <a href="/user/api/order/<%= e.id_order %> " class="btn btn-danger" style="margin-top: 10px;">Batal Transaksi</a>
               </div>

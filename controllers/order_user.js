@@ -18,10 +18,21 @@ const order = (req,res) =>{
         }
     });
 }
+const image = (req,res) =>{  
+    const sql = `select o.id_order,o.info from orders o join produks p on o.id_barang = p.id_barang join users u on o.id_user=u.id_user where o.id_order=${req.params.id}`;
+    const query = conn.query(sql,(err,result) =>{
+        if(err){
+            res.end("query is fault");
+        }else{
+            res.render('user/pembayaran_view',{Order:result,user : req.session.user || ""})
+            
+        }
+    });
+}
 const create = (req,res) =>{
     Produk.findOne({where:{id_barang:req.params.id}}).then(result =>{
         res.render('user/orderdetail_create',{Produk : result,user : req.session.user || ""})
     })
 }
 
-export default {order,create}
+export default {order,image,create}

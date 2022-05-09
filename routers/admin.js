@@ -1,4 +1,6 @@
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
 const router = express.Router();
 import Produk from '../models/produk.js';
 import Order from '../models/order.js';
@@ -11,6 +13,19 @@ import admin_dashboard_router from '../routers/admin/dashboard.js';
 import admin_user_router from './admin/user.js';
 import admin_profile_router from './admin/profile.js';
 import ac from '../controllers/admin.js';
+
+const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadFolder)
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+path.extname(file.originalname))
+    }
+  })
+  
+const upload = multer({ storage: storage });
 
 router.get('/login', ac.login);
 router.get('/logout', ac.logout);
@@ -53,20 +68,20 @@ router.get('/api/produks',(req,res) =>{
         res.json(result)
     })    
 })
-router.post('/api/produk',(req,res) =>{
+router.post('/api/produk',upload.single('gambar'),(req,res) =>{
     Produk.create({
         nama_barang : req.body.barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
-        gambar : req.body.gambar
+        gambar : req.file.filename
     }).then((result) => res.redirect('/admin/produk'));
 })
-router.post('/api/produk/edit/:id',(req,res) =>{
+router.post('/api/produk/edit/:id',upload.single('gambar'),(req,res) =>{
     Produk.update({
         nama_barang : req.body.nama_barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
-        gambar : req.body.gambar
+        gambar : req.file.filename
     },{where :{id_barang : req.params.id}}
     ).then(result =>{
         res.redirect('/admin/produk')

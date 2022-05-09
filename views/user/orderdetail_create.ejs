@@ -14,28 +14,30 @@
 </head>
 <body>
   <%- include('../template/nav_user.ejs') %>
-      <div class="container"  style="margin-top: 40px;">
-        <div class="row d-flex justify-content-evenly">
-          <div class="card" style="width: 22rem; padding: 15px; margin: 3px;">
-            <img src="../../../img/<%= Produk.gambar %> " class="card-img-top" width="200px" height="300px">
-            <div class="card-body">
-              <h5 class="card-title"><%= Produk.nama_barang %> </h5>
-              <p class="card-text"><%= Produk.deskripsi %></p>
-            </div>
-            <ul class="list-group list-group-flush" style="padding-bottom: 10px;">
-              <li class="list-group-item" id="hargaproduk">Rp. <%= Produk.harga %></li>
-            </ul>
-            <div class="card-body">
-              <input type="number" class="form-control" id="jumlah" placeholder="Masukkan jumlah barang..." oninput="hitung()">
-              <p class="card-text">Bukti Transfer :</p>
-              <input type="file" class="form-control" id="bukti_tf">
-              <p class="card-text" id="total"></p>
-            </div>
-            <button onclick=<%= "create("+[user.id_user,Produk.id_barang,Produk.harga]+")"  %> type="button" class="btn btn-success" >Order</button>
+  <form action="/user/api/order/<%= Produk.id_barang %>/<%= user.id_user %>" method="post" enctype="multipart/form-data">
+    <div class="container"  style="margin-top: 40px;">
+      <div class="row d-flex justify-content-evenly">
+        <div class="card" style="width: 22rem; padding: 15px; margin: 3px;">
+          <img src="../../../img/<%= Produk.gambar %> " class="card-img-top" width="200px" height="300px">
+          <div class="card-body">
+            <h5 class="card-title"><%= Produk.nama_barang %> </h5>
+            <p class="card-text"><%= Produk.deskripsi %></p>
           </div>
+          <ul class="list-group list-group-flush" style="padding-bottom: 10px;">
+            <li class="list-group-item" id="hargaproduk">Rp. <%= Produk.harga %></li>
+          </ul>
+          <div class="card-body">
+            <input type="number" class="form-control" id="jumlah" placeholder="Masukkan jumlah barang..." oninput="hitung()" name="jumlah">
+            <p class="card-text">Bukti Transfer :</p>
+            <input type="file" class="form-control" id="bukti_tf" name="gambar">
+            <p class="card-text" id="total"></p>
+          </div>
+          <button type="submit" class="btn btn-success" >Order</button>
+          <!-- <button onclick=<%= "create("+[user.id_user,Produk.id_barang,Produk.harga]+")"  %> type="button" class="btn btn-success" >Order</button> -->
         </div>
       </div>
     </div>
+  </form>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
@@ -44,23 +46,23 @@
       const hargaproduk = document.getElementById("hargaproduk").innerHTML.replace("Rp. ","");
       document.getElementById("total").innerHTML = "Total : Rp. "+jumlah*hargaproduk;
     }
-    const create = (iduser,idbarang,hargabarang) =>{
-      axios({
-        method : 'post',
-        url : '/user/api/order',
-        data :{
-          id_barang : idbarang,
-          id_user : iduser,
-          jumlah : document.getElementById("jumlah").value,
-          harga : hargabarang,                 
-          info : document.getElementById("bukti_tf").value.replace("C:\\fakepath\\", "")
-        }
-      }).then(result =>{
-          window.location = "/user/produk";
-      }).catch(err =>{
-        alert('error :'+err)
-        window.location = "/"
-      });
-    }
-  </script>
+  //   const create = (iduser,idbarang,hargabarang) =>{
+  //     axios({
+  //       method : 'post',
+  //       url : '/user/api/order',
+  //       data :{
+  //         id_barang : idbarang,
+  //         id_user : iduser,
+  //         jumlah : document.getElementById("jumlah").value,
+  //         harga : hargabarang,                 
+  //         info : document.getElementById("bukti_tf").value.replace("C:\\fakepath\\", "")
+  //       }
+  //     }).then(result =>{
+  //         window.location = "/user/produk";
+  //     }).catch(err =>{
+  //       alert('error :'+err)
+  //       window.location = "/"
+  //     });
+  //   }
+  // </script>
 </html>

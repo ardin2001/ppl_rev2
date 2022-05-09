@@ -97,16 +97,27 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     const del = (id) =>{
-        alert('Are you delete id : ' +id)
-        axios.delete('/admin/api/order/'+id).then(result =>{
-            alert('info status : '+ result.status)
+        const konfirmasi = confirm('Are you delete id : ' +id);
+        if (konfirmasi == true){
+            axios.delete('/admin/api/order/'+id).then(result =>{
             location.reload()
-        }).catch(err =>{
-            alert('error : '+err)
-        });
+            }).catch(err =>{
+                alert('error : '+err)
+            });
+        }
+        else{
+            alert("gagal")
+        }
+        // axios.delete('/admin/api/order/'+id).then(result =>{
+        //     location.reload()
+        // }).catch(err =>{
+        //     alert('error : '+err)
+        // });
     }
     const create = (idorder,iduser,idbarang,jumlah,hargabarang,buktitf) =>{
-        axios({
+        const konfirmasi = confirm('apakah anda yakin ingin menerima?');
+        if (konfirmasi == true){
+            axios({
             method : 'post',
             url : '/admin/api/transaksi',
             data :{
@@ -116,19 +127,14 @@
                 harga : hargabarang,                
                 info : buktitf
                 }
-                }).then(result =>{
-                    alert('info status: '+result.status)
-                    window.location = "http://127.0.0.1:3000/user";
-                }).catch(err =>{
-                    alert('error :'+err)
-                    window.location = "/"
                 });
-        axios.delete('/admin/api/order/'+idorder).then(result =>{
-            alert('info status : '+ result.status)
-            location.reload()
-            }).catch(err =>{
-                alert('error : '+err)
+            axios.delete('/admin/api/order/'+idorder).then(result =>{
+                location.reload();
             });
+        }
+        else{
+            alert("gagal")
+        }
         }
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");

@@ -1,4 +1,5 @@
 import mysql2 from 'mysql2';
+import Order from '../models/order.js';
 const conn = mysql2.createConnection({
     host : 'localhost',
     user : 'root',
@@ -18,4 +19,9 @@ const order = (req,res) =>{
         }
     });
 }
+// const order = (req,res) =>{
+//     Order.findAll().then((result) =>{
+//         res.render('admin/order_view',{Order:result,user : req.session.user || ""})
+//     })
+// }
 export default {order}

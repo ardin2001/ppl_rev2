@@ -20,10 +20,7 @@ app.use(express.urlencoded({extended : false}));
 app.use(session({
     secret : 'inisecret',
     resave : false,
-    saveUninitialized : true,
-    cookie :{
-        maxAge : 60*60*1000
-    }
+    saveUninitialized : true
 }));
 
 app.set('view engine','ejs')

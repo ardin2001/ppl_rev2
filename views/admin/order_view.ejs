@@ -98,9 +98,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    function coba(){
-        alert('berhasil')
-    }
     const del = (id) =>{
         const konfirmasi = confirm('Are you delete id : ' +id);
         if (konfirmasi == true){
@@ -113,13 +110,39 @@
         else{
             alert("gagal")
         }
+        // axios.delete('/admin/api/order/'+id).then(result =>{
+        //     location.reload()
+        // }).catch(err =>{
+        //     alert('error : '+err)
+        // });
     }
-    var el = document.getElementById("wrapper");
-    var toggleButton = document.getElementById("menu-toggle");
-
-    toggleButton.onclick = function () {
-        el.classList.toggle("toggled");
-    };
-    const change = document.getElementById('title').innerHTML = "Order";
+    const create = (idorder,iduser,idbarang,jumlah,hargabarang,buktitf) =>{
+        const konfirmasi = confirm('apakah anda yakin ingin menerima?');
+        if (konfirmasi == true){
+            axios({
+            method : 'post',
+            url : '/admin/api/transaksi',
+            data :{
+                id_barang : idbarang,
+                id_user : iduser,
+                jumlah : jumlah,
+                harga : hargabarang,                
+                info : buktitf
+                }
+                });
+            axios.delete('/admin/api/order/'+idorder).then(result =>{
+                location.reload();
+            });
+        }
+        else{
+            alert("gagal")
+        }
+        }
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+        const change = document.getElementById('title').innerHTML = "Order";
 </script>
 </html>

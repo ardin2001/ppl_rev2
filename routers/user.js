@@ -1,4 +1,6 @@
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
 const router = express.Router();
 import Produk from '../models/produk.js';
 import Order from '../models/order.js';
@@ -14,6 +16,18 @@ const conn = mysql2.createConnection({
     password : '',
     database : 'toko'
 });
+const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadFolder)
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+path.extname(file.originalname))
+    }
+  })
+  
+const upload = multer({ storage: storage });
 
 router.get('/login', mc.login);
 router.get('/logout', mc.logout);
@@ -38,14 +52,15 @@ router.post('/api/register',(req,res) =>{
     }).then((result) => res.redirect('/user/login'));
 })
 //=== api order ===//
-router.post('/api/order',(req,res) =>{
+router.post('/api/order/:idbarang/:iduser',upload.single('gambar'),(req,res) =>{
     Order.create({
-        id_barang : req.body.id_barang,
-        id_user : req.body.id_user,
+        // id_barang : 15,
+        // id_user : 1,
+        id_barang : req.params.idbarang,
+        id_user : req.params.iduser,
         jumlah : req.body.jumlah,
-        total : req.body.jumlah*req.body.harga,
-        info : req.body.info
-    }).then((result) => res.json(result));
+        info : req.file.filename
+    }).then((result) => res.redirect(`/user/produk`));
 })
 //=== api order ===//
 router.get('/api/order/:id',(req,res) =>{

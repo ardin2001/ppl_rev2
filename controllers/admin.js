@@ -1,9 +1,9 @@
 import Admin from '../models/admin.js';
 const login = (req,res,next) =>{
     let message = req.session.err || "";
-    let user = req.session.user || "";
+    let admin = req.session.admin || "";
     req.session.err = "";
-    res.render('admin/login',{message,user})
+    res.render('admin/login',{message,admin})
 }
 
 const logout = (req,res,next) =>{
@@ -23,7 +23,7 @@ const auth = (req,res,next) =>{
             req.session.err = "Incorrect password";
             res.redirect('login')
         }else{
-            req.session.user = result;
+            req.session.admin = result;
             // res.redirect('/transaksi')
             res.redirect('/admin/dashboard')
         }

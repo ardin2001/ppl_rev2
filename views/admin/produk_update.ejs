@@ -13,7 +13,7 @@
   <%- include('../template/nav.ejs') %>
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center bg-light col-3.5" style="padding: 20px; border-radius: 2%;">
-      <form  action="/admin/api/produk/edit/<%= Produk.id_barang %> " method="post">
+      <form  action="/admin/api/produk/edit/<%= Produk.id_barang %> " method="post" enctype="multipart/form-data">
         <div class="mb-4">
           <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
           <input type="text" class="form-control" id="name" name="nama_barang" value="<%= Produk.nama_barang %> ">

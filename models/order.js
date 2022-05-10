@@ -9,7 +9,9 @@ const Order = sequelize.define('order',{
     info : DataTypes.STRING
 });
 Produk.hasMany(Order,{foreignKey : 'id_barang'});
+Order.belongsTo(Produk,{foreignKey : 'id_barang'});
 User.hasMany(Order, {foreignKey : 'id_user'});
+Order.belongsTo(User,{foreignKey : 'id_user'});
 
 
 export default Order;

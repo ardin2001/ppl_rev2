@@ -1,4 +1,4 @@
 const read = (req,res) =>{
-    res.render('admin/dashboard',{user : req.session.user || ""})
+    res.render('admin/dashboard',{admin : req.session.admin || ""})
 }
 export default {read}

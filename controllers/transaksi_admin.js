@@ -13,7 +13,7 @@ const transaksi = (req,res) =>{
             res.end("query is fault");
         }else{
             // res.json(result);
-            res.render('admin/transaksi_view',{Transaksi:result,user : req.session.user || ""})
+            res.render('admin/transaksi_view',{Transaksi:result,admin : req.session.admin || ""})
             
         }
     })

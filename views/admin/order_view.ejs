@@ -72,22 +72,24 @@
             </thead>
             <tbody>
                 <% Order.forEach(e => { %>
-                    <tr>
-                        <td><%= e.id_order %> </td>
-                        <td><%= e.nama_pembeli %> </td>
-                        <td><%= e.no_telp %> </td>
-                        <td><%= e.alamat %> </td>
-                        <td><%= e.nama_barang %> </td>
-                        <td><%= e.harga %> </td>
-                        <td><%= e.jumlah %> </td>
-                        <td><%= e.harga*e.jumlah %> </td>
-                        <td><img src="../img/<%= e.info %>" width="60px" height="40px"></td>
-                        <td ><%= e.updatedAt.toLocaleDateString() %> </td>
-                        <td>
-                            <button onclick= <%= "del("+e.id_order+")" %>  type="button" class="btn btn-danger">Tolak</button>
-                            <button onclick= <%= "create("+[e.id_order,e.id_user,e.id_barang,e.jumlah,e.harga,"'"+e.info+"'"]+")" %>  type="button" class="btn btn-success" >Terima</button>                            
-                        </td>
-                    </tr>
+                    <form action="/admin/api/transaksi/<%= e.id_order %>/<%= e.user.nama_pembeli %>/<%= e.user.no_telp %>/<%= e.user.alamat %>/<%= e.produk.nama_barang %>/<%= e.produk.harga %>/<%= e.jumlah %>/<%= e.info %> " method="post">
+                        <tr>
+                            <td><%= e.id_order %> </td>
+                            <td><%= e.user.nama_pembeli %> </td>
+                            <td><%= e.user.no_telp %> </td>
+                            <td><%= e.user.alamat %> </td>
+                            <td><%= e.produk.nama_barang %> </td>
+                            <td><%= e.produk.harga %> </td>
+                            <td><%= e.jumlah %> </td>
+                            <td><%= e.produk.harga*e.jumlah %> </td>
+                            <td><img src="../img/<%= e.info %>" width="60px" height="40px"></td>
+                            <td ><%= e.updatedAt.toLocaleDateString() %> </td>
+                            <td>
+                                <button onclick= <%= "del("+e.id_order+")" %>  type="button" class="btn btn-danger">Tolak</button>
+                                <button type="submit" class="btn btn-success">Terima</button>                        
+                            </td>
+                        </tr>
+                    </form>
                 <% }) %>
             </tbody>
           </table>
@@ -96,46 +98,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const del = (id) =>{
-        alert('Are you delete id : ' +id)
-        axios.delete('/admin/api/order/'+id).then(result =>{
-            alert('info status : '+ result.status)
-            location.reload()
-        }).catch(err =>{
-            alert('error : '+err)
-        });
+    function coba(){
+        alert('berhasil')
     }
-    const create = (idorder,iduser,idbarang,jumlah,hargabarang,buktitf) =>{
-        axios({
-            method : 'post',
-            url : '/admin/api/transaksi',
-            data :{
-                id_barang : idbarang,
-                id_user : iduser,
-                jumlah : jumlah,
-                harga : hargabarang,                
-                info : buktitf
-                }
-                }).then(result =>{
-                    alert('info status: '+result.status)
-                    window.location = "http://127.0.0.1:3000/user";
-                }).catch(err =>{
-                    alert('error :'+err)
-                    window.location = "/"
-                });
-        axios.delete('/admin/api/order/'+idorder).then(result =>{
-            alert('info status : '+ result.status)
+    const del = (id) =>{
+        const konfirmasi = confirm('Are you delete id : ' +id);
+        if (konfirmasi == true){
+            axios.delete('/admin/api/order/'+id).then(result =>{
             location.reload()
             }).catch(err =>{
                 alert('error : '+err)
             });
         }
-        var el = document.getElementById("wrapper");
-        var toggleButton = document.getElementById("menu-toggle");
+        else{
+            alert("gagal")
+        }
+    }
+    var el = document.getElementById("wrapper");
+    var toggleButton = document.getElementById("menu-toggle");
 
-        toggleButton.onclick = function () {
-            el.classList.toggle("toggled");
-        };
-        const change = document.getElementById('title').innerHTML = "Order";
+    toggleButton.onclick = function () {
+        el.classList.toggle("toggled");
+    };
+    const change = document.getElementById('title').innerHTML = "Order";
 </script>
 </html>

@@ -1,4 +1,6 @@
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
 const router = express.Router();
 import Produk from '../models/produk.js';
 import Order from '../models/order.js';
@@ -12,6 +14,19 @@ import admin_user_router from './admin/user.js';
 import admin_profile_router from './admin/profile.js';
 import ac from '../controllers/admin.js';
 
+const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, uploadFolder)
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+path.extname(file.originalname))
+    }
+  })
+  
+const upload = multer({ storage: storage });
+
 router.get('/login', ac.login);
 router.get('/logout', ac.logout);
 router.post('/login', ac.auth);
@@ -22,7 +37,6 @@ router.use('/transaksi',admin_transaksi_router);
 router.use('/dashboard',admin_dashboard_router);
 router.use('/user',admin_user_router);
 router.use('/profile',admin_profile_router);
-
 
 // ======= api admin ========== //
 
@@ -53,20 +67,20 @@ router.get('/api/produks',(req,res) =>{
         res.json(result)
     })    
 })
-router.post('/api/produk',(req,res) =>{
+router.post('/api/produk',upload.single('gambar'),(req,res) =>{
     Produk.create({
         nama_barang : req.body.barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
-        gambar : req.body.gambar
+        gambar : req.file.filename
     }).then((result) => res.redirect('/admin/produk'));
 })
-router.post('/api/produk/edit/:id',(req,res) =>{
+router.post('/api/produk/edit/:id',upload.single('gambar'),(req,res) =>{
     Produk.update({
         nama_barang : req.body.nama_barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
-        gambar : req.body.gambar
+        gambar : req.file.filename
     },{where :{id_barang : req.params.id}}
     ).then(result =>{
         res.redirect('/admin/produk')
@@ -103,14 +117,20 @@ router.delete('/api/order/:id',(req,res) =>{
     });
 })
 //=== api transaksi ===//
-router.post('/api/transaksi',(req,res) =>{
+router.post('/api/transaksi/:idorder/:nama/:telp/:alamat/:namabarang/:harga/:jumlah/:info',(req,res,next) =>{
     Transaksi.create({
-        id_barang : req.body.id_barang,
-        id_user : req.body.id_user,
-        jumlah : req.body.jumlah,
-        total : req.body.jumlah*req.body.harga,
-        info : req.body.info
-    }).then((result) => res.json(result));
-})
+        nama_pembeli : req.params.nama,
+        no_telp :  req.params.telp,
+        alamat :  req.params.alamat,
+        nama_barang :  req.params.namabarang,
+        harga :  req.params.harga,
+        jumlah :  req.params.jumlah,
+        info :  req.params.info
+    }),next()
+    },(req,res,next) =>{
+        Order.destroy({where : {id_order : req.params.idorder}})
+        .then(result => res.redirect('/admin/order'))
+    }
+)
 
 export default router;

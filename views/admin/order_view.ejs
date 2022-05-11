@@ -72,7 +72,7 @@
             </thead>
             <tbody>
                 <% Order.forEach(e => { %>
-                    <form action="/admin/api/transaksi/<%= e.id_order %>/<%= e.user.nama_pembeli %>/<%= e.user.no_telp %>/<%= e.user.alamat %>/<%= e.produk.nama_barang %>/<%= e.produk.harga %>/<%= e.jumlah %>/<%= e.info %> " method="post">
+                    <form action="/admin/api/transaksi/<%= e.id_order %>/<%= e.produk.id_barang %> /<%= e.user.nama_pembeli %>/<%= e.user.no_telp %>/<%= e.user.alamat %>/<%= e.produk.nama_barang %>/<%= e.produk.harga %>/<%= e.jumlah %>/<%= e.info %> " method="post">
                         <tr>
                             <td><%= e.id_order %> </td>
                             <td><%= e.user.nama_pembeli %> </td>
@@ -86,7 +86,7 @@
                             <td ><%= e.updatedAt.toLocaleDateString() %> </td>
                             <td>
                                 <button onclick= <%= "del("+e.id_order+")" %>  type="button" class="btn btn-danger">Tolak</button>
-                                <button type="submit" class="btn btn-success">Terima</button>                        
+                                <button type="submit" class="btn btn-success" onclick=<%= "konfirmasi("+e.id_order+")"  %> >Terima</button>                        
                             </td>
                         </tr>
                     </form>
@@ -98,6 +98,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    const konfirmasi = (id) =>{
+        alert(`Data Pemesanan dengan id ${id} Berhasil Ditambahkan`)
+    }
     const del = (id) =>{
         const konfirmasi = confirm('Are you delete id : ' +id);
         if (konfirmasi == true){
@@ -110,39 +113,12 @@
         else{
             alert("gagal")
         }
-        // axios.delete('/admin/api/order/'+id).then(result =>{
-        //     location.reload()
-        // }).catch(err =>{
-        //     alert('error : '+err)
-        // });
     }
-    const create = (idorder,iduser,idbarang,jumlah,hargabarang,buktitf) =>{
-        const konfirmasi = confirm('apakah anda yakin ingin menerima?');
-        if (konfirmasi == true){
-            axios({
-            method : 'post',
-            url : '/admin/api/transaksi',
-            data :{
-                id_barang : idbarang,
-                id_user : iduser,
-                jumlah : jumlah,
-                harga : hargabarang,                
-                info : buktitf
-                }
-                });
-            axios.delete('/admin/api/order/'+idorder).then(result =>{
-                location.reload();
-            });
-        }
-        else{
-            alert("gagal")
-        }
-        }
-        var el = document.getElementById("wrapper");
-        var toggleButton = document.getElementById("menu-toggle");
-        toggleButton.onclick = function () {
-            el.classList.toggle("toggled");
-        };
-        const change = document.getElementById('title').innerHTML = "Order";
+    var el = document.getElementById("wrapper");
+    var toggleButton = document.getElementById("menu-toggle");
+    toggleButton.onclick = function () {
+        el.classList.toggle("toggled");
+    };
+    const change = document.getElementById('title').innerHTML = "Order";
 </script>
 </html>

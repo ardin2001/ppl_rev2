@@ -116,22 +116,6 @@ router.delete('/api/order/:id',(req,res) =>{
         res.json(result)
     });
 })
-//=== api transaksi ===//
-// router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:harga/:jumlah/:info',(req,res,next) =>{
-//     Transaksi.create({
-//         id_barang : req.params.idproduk,
-//         nama_pembeli : req.params.nama,
-//         no_telp :  req.params.telp,
-//         alamat :  req.params.alamat,
-//         nama_barang :  req.params.namabarang,
-//         harga :  req.params.harga,
-//         jumlah :  req.params.jumlah,
-//         info :  req.params.info
-//     }).then(result =>{
-//         res.json(result)
-//     })
-//     }
-// )
 router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:harga/:jumlah/:info',(req,res,next) =>{
     Transaksi.create({
         id_barang : req.params.idproduk,

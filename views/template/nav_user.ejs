@@ -16,11 +16,13 @@
             <a class="nav-link" href="/user/transaksi/<%= user.nama_pembeli %>">Riwayat Pemesanan</a>
           </li>
         </ul>
-        
-        <form class="d-flex">
-            <p ><%= user.nama_pembeli %></p>
-            <button class="btn btn-danger" type="submit"><a href="/user/logout" style="color: black;">Logout</a></button>
-        </form>
+        <div class="d-flex btn-group">
+          <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; text-decoration: none;"><%= user.nama_pembeli %></a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/profile/<%= user.id_user %> ">Profile</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
       </div>
     </div>
 </nav>

@@ -5,5 +5,6 @@ const router = express.Router();
 router.get('/:id',order_user.order);
 router.get('/order/:id',order_user.create);
 router.get('/image/:id',order_user.image);
+router.get('/edit/:id',order_user.edit);
 
 export default router;

@@ -4,6 +4,7 @@ const Produk = sequelize.define('produk',{
     nama_barang : DataTypes.STRING,
     deskripsi : DataTypes.STRING,
     harga : DataTypes.INTEGER,
+    // status : DataTypes.TINYINT,
     gambar : DataTypes.STRING
 });
 export default Produk;

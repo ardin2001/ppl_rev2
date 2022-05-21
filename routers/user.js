@@ -9,6 +9,7 @@ import mc from '../controllers/user.js';
 import user_produk_router from './user/produk.js';
 import user_order_router from './user/order.js';
 import user_transaksi_router from './user/transaksi.js';
+import user_profile_router from './user/profile.js';
 import mysql2 from 'mysql2';
 const conn = mysql2.createConnection({
     host : 'localhost',
@@ -37,6 +38,7 @@ router.use('/produk',user_produk_router);
 router.use('/order',user_order_router);
 router.use('/create',user_order_router);
 router.use('/transaksi',user_transaksi_router);
+router.use('/profile',user_profile_router);
 
 // ======= api user ========== //
 
@@ -51,16 +53,36 @@ router.post('/api/register',(req,res) =>{
         alamat : req.body.alamat
     }).then((result) => res.redirect('/user/login'));
 })
+//=== api profile ===//
+router.post('/api/profile/edit/:id',(req,res) =>{
+    User.update({
+        username : req.body.username,
+        password : req.body.password,
+        nama_admin : req.body.nama,
+        no_telp : req.body.telp,
+        email : req.body.email,
+        alamat : req.body.alamat
+    },{where :{id_user : req.params.id}}
+    ).then(result => res.redirect(`/user/profile/${req.params.id}`));
+})
 //=== api order ===//
 router.post('/api/order/:idbarang/:iduser',upload.single('gambar'),(req,res) =>{
     Order.create({
-        // id_barang : 15,
-        // id_user : 1,
         id_barang : req.params.idbarang,
         id_user : req.params.iduser,
         jumlah : req.body.jumlah,
         info : req.file.filename
     }).then((result) => res.redirect(`/user/produk`));
+})
+//=== api order ===//
+router.post('/api/order/edit/:idbarang/:iduser/:idorder',upload.single('gambar'),(req,res) =>{
+    Order.update({
+        id_barang : req.params.idbarang,
+        id_user : req.params.iduser,
+        jumlah : req.body.jumlah,
+        info : req.file.filename
+    },{where :{id_order : req.params.idorder}}
+    ).then((result) => res.redirect(`/user/produk`));
 })
 //=== api order ===//
 router.get('/api/order/:id',(req,res) =>{

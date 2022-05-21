@@ -9,7 +9,7 @@ const conn = mysql2.createConnection({
 });
 
 const read = (req,res) =>{
-    Transaksi.findAll({include:[{model : Produk}],where:{nama_pembeli:req.params.id}}).then((result) =>{
+    Transaksi.findAll({where:{nama_pembeli:req.params.id}}).then((result) =>{
         res.render('user/transaksi_view',{Transaksi:result,user : req.session.user || ""})
         // res.json(result)
     })

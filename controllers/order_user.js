@@ -1,5 +1,7 @@
 import mysql2 from 'mysql2';
 import Produk from '../models/produk.js';
+import User from '../models/user.js';
+import Order from '../models/order.js';
 const conn = mysql2.createConnection({
     host : 'localhost',
     user : 'root',
@@ -34,5 +36,10 @@ const create = (req,res) =>{
         res.render('user/orderdetail_create',{Produk : result,user : req.session.user || ""})
     })
 }
+const edit = (req,res) =>{
+    Order.findOne({include : [{model : Produk},{model : User}],where:{id_order:req.params.id}}).then(result =>{
+        res.render('user/order_edit',{Order : result,user : req.session.user || ""})
+    })
+}
 
-export default {order,image,create}
+export default {order,image,create,edit}

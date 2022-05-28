@@ -25,11 +25,13 @@
           </div>
           <ul class="list-group list-group-flush" style="padding-bottom: 10px;">
             <li class="list-group-item" id="hargaproduk">Rp. <%= Produk.harga %></li>
+            <li class="list-group-item" id="hargaproduk">Show Comments : <a href="/user/rating/<%= Produk.id_barang %> ">Klik</a></li>
           </ul>
           <div class="card-body">
-            <input type="number" class="form-control" id="jumlah" placeholder="Masukkan jumlah barang..." oninput="hitung()" name="jumlah">
-            <p class="card-text">Bukti Transfer :</p>
-            <input type="file" class="form-control" id="bukti_tf" name="gambar">
+            <label for="exampleInputEmail1" class="form-label">Jumlah Barang</label>
+            <input type="number" class="form-control mb-3" id="jumlah" placeholder="Masukkan jumlah barang..." oninput="hitung()" name="jumlah">
+            <label for="exampleInputEmail1" class="form-label">Bukti Transfer</label>
+            <input type="file" class="form-control mb-3" id="bukti_tf" name="gambar">
             <p class="card-text" id="total"></p>
           </div>
           <button type="submit" class="btn btn-success" >Order</button>

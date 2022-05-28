@@ -14,21 +14,20 @@
     <title>Document</title>
 </head>
 <body>
-  <%- include('../template/nav_user.ejs') %>
-  <div class="row d-flex justify-content-evenly">
-    <% Produk.forEach(e => { %>
-      <div class="card" style="width: 16rem; padding: 15px; margin: 3px;">
-        <img src="../../img/<%=e.gambar %> " class="card-img-top" width="200px" height="200px">
-        <div class="card-body">
-          <h5 class="card-title"><%= e.nama_barang %></h5>
-          <p class="card-text"><%= e.deskripsi %></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Harga : Rp. <%= e.harga %></li>
-        </ul>
-        <a href="/user/order/create/<%= e.id_barang %> " class="btn btn-primary">Order</a>
-      </div>           
-    <% }) %>
-  </div>
-  </body>
+    <%- include('../template/nav_user.ejs') %>
+    <div class="container-fluid px-4">
+        <main>
+            <% Rating.forEach(e => { %>
+                <div class="card col-4 mb-2" style="margin: auto;">
+                    <h4 class="card-header"><%= e.user.nama_pembeli %> </h4>
+                    <div class="card-body">
+                      <!-- <h5 class="card-title">Rating : <%= e.bintang %> </h5> -->
+                      <p class="card-text">Pesan : <%= e.bintang %> </p>
+                      <p class="card-text">Pesan : <%= e.pesan %> </p>
+                    </div>
+                  </div>
+            <% }) %>
+        </main>
+    </div>
+</body>
 </html>

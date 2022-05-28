@@ -45,7 +45,7 @@ router.post('/api/register',(req,res) =>{
     Admin.create({
         username : req.body.username,
         password : req.body.password,
-        nama_admin : req.body.nama,
+        nama_admin : req.body.lengkap,
         no_telp : req.body.telp,
         alamat : req.body.alamat
     }).then((result) => res.redirect('/admin/login'));
@@ -72,6 +72,7 @@ router.post('/api/produk',upload.single('gambar'),(req,res) =>{
         nama_barang : req.body.barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
+        status : req.body.status,
         gambar : req.file.filename
     }).then((result) => res.redirect('/admin/produk'));
 })
@@ -80,7 +81,8 @@ router.post('/api/produk/edit/:id',upload.single('gambar'),(req,res) =>{
         nama_barang : req.body.nama_barang,
         deskripsi : req.body.deskripsi,
         harga : req.body.harga,
-        gambar : req.file.filename
+        gambar : req.file.filename,
+        status : req.body.status
     },{where :{id_barang : req.params.id}}
     ).then(result =>{
         res.redirect('/admin/produk')
@@ -116,7 +118,7 @@ router.delete('/api/order/:id',(req,res) =>{
         res.json(result)
     });
 })
-router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:harga/:jumlah/:info',(req,res,next) =>{
+router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:harga/:jumlah/:info/:gambar',(req,res,next) =>{
     Transaksi.create({
         id_barang : req.params.idproduk,
         nama_pembeli : req.params.nama,
@@ -125,7 +127,8 @@ router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:
         nama_barang :  req.params.namabarang,
         harga :  req.params.harga,
         jumlah :  req.params.jumlah,
-        info :  req.params.info
+        info :  req.params.info,
+        gambar : req.params.gambar
     }),next()
     },(req,res,next) =>{
         Order.destroy({where : {id_order : req.params.idorder}})

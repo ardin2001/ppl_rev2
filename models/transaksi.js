@@ -8,7 +8,8 @@ const Transaksi = sequelize.define('transaksi',{
     nama_barang : DataTypes.STRING,
     harga : DataTypes.INTEGER,
     jumlah : DataTypes.INTEGER,
-    info : DataTypes.STRING
+    info : DataTypes.STRING,
+    gambar : DataTypes.STRING
 });
 
 export default Transaksi;

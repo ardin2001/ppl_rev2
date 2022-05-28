@@ -5,11 +5,13 @@ const router = express.Router();
 import Produk from '../models/produk.js';
 import Order from '../models/order.js';
 import User from '../models/user.js';
+import Rating from '../models/rating.js';
 import mc from '../controllers/user.js';
 import user_produk_router from './user/produk.js';
 import user_order_router from './user/order.js';
 import user_transaksi_router from './user/transaksi.js';
 import user_profile_router from './user/profile.js';
+import user_rating_router from './user/rating.js';
 import mysql2 from 'mysql2';
 const conn = mysql2.createConnection({
     host : 'localhost',
@@ -36,9 +38,10 @@ router.post('/login', mc.auth);
 
 router.use('/produk',user_produk_router);
 router.use('/order',user_order_router);
-router.use('/create',user_order_router);
+// router.use('/create',user_order_router);
 router.use('/transaksi',user_transaksi_router);
 router.use('/profile',user_profile_router);
+router.use('/rating',user_rating_router);
 
 // ======= api user ========== //
 
@@ -91,5 +94,13 @@ router.get('/api/order/:id',(req,res) =>{
         res.redirect(`/user/produk`)
     });
 })
-
+//=== api order ===//
+router.post('/api/rating/:idbarang/:iduser',(req,res) =>{
+    Rating.create({
+        id_barang : req.params.idbarang,
+        id_user : req.params.iduser,
+        bintang : req.body.bintang,
+        pesan : req.body.pesan
+    }).then((result) => res.redirect(`/user/produk`));
+})
 export default router;

@@ -72,7 +72,7 @@
             </thead>
             <tbody>
                 <% Order.forEach(e => { %>
-                    <form action="/admin/api/transaksi/<%= e.id_order %>/<%= e.produk.id_barang %> /<%= e.user.nama_pembeli %>/<%= e.user.no_telp %>/<%= e.user.alamat %>/<%= e.produk.nama_barang %>/<%= e.produk.harga %>/<%= e.jumlah %>/<%= e.info %> " method="post">
+                    <form action="/admin/api/transaksi/<%= e.id_order %>/<%= e.produk.id_barang %> /<%= e.user.nama_pembeli %>/<%= e.user.no_telp %>/<%= e.user.alamat %>/<%= e.produk.nama_barang %>/<%= e.produk.harga %>/<%= e.jumlah %>/<%= e.info %>/<%= e.produk.gambar %>  " method="post">
                         <tr>
                             <td><%= e.id_order %> </td>
                             <td><%= e.user.nama_pembeli %> </td>

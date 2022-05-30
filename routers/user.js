@@ -82,7 +82,7 @@ router.post('/api/order/edit/:idbarang/:iduser/:idorder',upload.single('gambar')
     Order.update({
         id_barang : req.params.idbarang,
         id_user : req.params.iduser,
-        jumlah : req.body.jumlah,
+        // jumlah : req.body.jumlah,
         info : req.file.filename
     },{where :{id_order : req.params.idorder}}
     ).then((result) => res.redirect(`/user/produk`));

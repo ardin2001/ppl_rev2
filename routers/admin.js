@@ -12,6 +12,7 @@ import admin_transaksi_router from '../routers/admin/transaksi.js';
 import admin_dashboard_router from '../routers/admin/dashboard.js';
 import admin_user_router from './admin/user.js';
 import admin_profile_router from './admin/profile.js';
+import admin_rating_router from './admin/rating.js';
 import ac from '../controllers/admin.js';
 
 const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
@@ -37,6 +38,7 @@ router.use('/transaksi',admin_transaksi_router);
 router.use('/dashboard',admin_dashboard_router);
 router.use('/user',admin_user_router);
 router.use('/profile',admin_profile_router);
+router.use('/ulasan',admin_rating_router);
 
 // ======= api admin ========== //
 

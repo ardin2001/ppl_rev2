@@ -17,6 +17,7 @@
   <%- include('../template/nav_user.ejs') %>
   <div class="container-fluid px-4">
     <main>
+    <p style="text-align: center;">Jika ingin mengubah alamat,ubah profile alamat anda</p>
         <div class="card" style="width: 23rem; margin: auto;">
             <img src="../../../img/<%= Order.produk.gambar %> " class="card-img-top" alt="..." style="width: 250px; height: 250px; margin: auto; padding: 25px;">
             <div class="card-body">
@@ -26,8 +27,8 @@
                   <p>Nama Pembeli : <%= Order.user.nama_pembeli %> </p>
                   <p>Alamat : <%= Order.user.alamat %> </p>
                   <p id="hargaproduk">Harga : <%= Order.produk.harga %></p>
-                  <p>Jumlah barang :<input type="number" id="jumlah" name="jumlah" oninput="hitung()" style="width: 170px;"></p>
-                  <p class="card-text" id="total"></p>
+                  <!-- <p>Jumlah barang :<input type="number" id="jumlah" name="jumlah" oninput="hitung()" style="width: 170px;"></p>
+                  <p class="card-text" id="total"></p> -->
                   <p>Bukti Transfer : <input type="file" name="gambar" accept="image/*" style="width: 180px;"></p>
                   <button type="submit" class="btn btn-warning" style="margin-left: 8rem;">Simpan</button>
                 </form>

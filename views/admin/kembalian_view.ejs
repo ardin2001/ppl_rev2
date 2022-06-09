@@ -12,41 +12,43 @@
 <body>
     <%- include('../template/nav.ejs') %>
     <div class="container-fluid px-4">
-        <a href="/admin/produk/create" class="btn btn-primary" style="margin-top: 5px;margin-bottom: 10px;">Tambah Produk</a>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
                 <th scope="col">id</th>
+                <th scope="col">Nama Pembeli</th>
+                <th scope="col">No Telp</th>
+                <th scope="col">Alamat</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Deskripsi</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Status</th>
-                <th scope="col">Gambar</th>
+                <th scope="col">Bukti TF</th>
+                <th scope="col">Bukti Kembalian</th>
+                <th scope="col">tanggal</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-                <% Produk.forEach(e => { %>
-                    <tr>
-                        <td><%= e.id_barang %> </td>
-                        <th><%= e.nama_barang %> </th>
-                        <td><%= e.deskripsi %> </td>
-                        <td><%= e.harga %> </td>
-                        <td><% if (e.status === 1) { %>
-                            Tersedia
-                        <% } else { %>
-                            Kosong
-                        <% } %> 
-                         </td>
-                        <td><img src="../img/<%= e.gambar %>" width="60px" height="60px"></td>
-                        <td>
-                            <a href="/admin/produk/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
-                            <!-- <a href="/admin/api/produk/delete/<%= e.id_barang %> " class="btn btn-danger">Delete</a> -->
-                        </td>
-                    </tr>
-                <% }) %>
+              <% Kembalian.forEach(e => { %>
+                <tr>
+                  <td><%= e.id_kembalian %> </td>
+                  <td><%= e.user.nama_pembeli %> </td>
+                  <td><%= e.user.no_telp %> </td>
+                  <td><%= e.user.alamat %> </td>
+                  <td><%= e.produk.nama_barang %> </td>
+                  <td><img src="../img/<%= e.info %>" width="60px" height="40px"></td>
+                  <td><% if (e.bukti_kembalian === null) { %>
+                    Null
+                    <% } else { %>
+                      <img src="../../img/<%= e.bukti_kembalian %>" width="60px" height="40px">
+                    <% } %> 
+                 </td>
+                  <td ><%= e.updatedAt.toLocaleDateString() %> </td>
+                  <td>
+                      <a href="/admin/kembalian/edit/<%= e.id_kembalian %> " type="button" class="btn btn-danger">Tambah Kembalian</a>                        
+                  </td>
+              </tr>
+              <% }) %>
             </tbody>
-        </table>
+          </table>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
@@ -54,10 +56,9 @@
 <script>
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
-
     toggleButton.onclick = function () {
         el.classList.toggle("toggled");
     };
-    const change = document.getElementById('title').innerHTML = "Produk";
+    const change = document.getElementById('title').innerHTML = "Kembalian";
 </script>
 </html>

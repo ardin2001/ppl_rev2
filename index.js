@@ -10,6 +10,8 @@ import Order from './models/order.js';
 import Produk from './models/produk.js';
 import Transaksi from './models/transaksi.js';
 import Rating from './models/rating.js';
+import Kembalian from './models/kembalian.js';
+import Pemasukan from './models/pemasukan.js';
 const app = express();
 const conn = mysql2.createConnection({
     host : 'localhost',
@@ -32,7 +34,7 @@ app.use('/',root_router);
 app.use('/admin',admin_router);
 app.use('/user',user_router);
 app.get('/create',(req,res) =>{
-    Rating.sync();
+    Pemasukan.sync();
     res.end('succes');
 })
 app.listen(3000,() => {

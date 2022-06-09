@@ -6,6 +6,7 @@ import Produk from '../models/produk.js';
 import Order from '../models/order.js';
 import User from '../models/user.js';
 import Rating from '../models/rating.js';
+import Kembalian from '../models/kembalian.js';
 import mc from '../controllers/user.js';
 import user_produk_router from './user/produk.js';
 import user_order_router from './user/order.js';
@@ -87,13 +88,18 @@ router.post('/api/order/edit/:idbarang/:iduser/:idorder',upload.single('gambar')
     },{where :{id_order : req.params.idorder}}
     ).then((result) => res.redirect(`/user/produk`));
 })
-//=== api order ===//
-router.get('/api/order/:id',(req,res) =>{
-    Order.destroy({where:{id_order : req.params.id}}
-    ).then(result => {
-        res.redirect(`/user/produk`)
-    });
-})
+//=== api order ===// perlu update
+router.get('/api/btltransaksi/:id_order/:iduser/:idbarang/:buktitf',(req,res,next) =>{
+    Kembalian.create({
+        id_user : req.params.iduser,
+        id_barang : req.params.idbarang,
+        info : req.params.buktitf
+    }),next()
+    },(req,res,next) =>{
+        Order.destroy({where : {id_order : req.params.id_order}})
+        .then(result => res.redirect('/user/produk'))
+    }
+)
 //=== api order ===//
 router.post('/api/rating/:idbarang/:iduser',(req,res) =>{
     Rating.create({

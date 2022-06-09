@@ -12,48 +12,6 @@
 <body>
     <%- include('../template/nav.ejs') %>
     <div class="container-fluid px-4">
-        <div class="row g-3 my-2">
-            <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                        <h3 class="fs-2">720</h3>
-                        <p class="fs-5">Products</p>
-                    </div>
-                    <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                        <h3 class="fs-2">4920</h3>
-                        <p class="fs-5">Sales</p>
-                    </div>
-                    <i
-                        class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                        <h3 class="fs-2">746</h3>
-                        <p class="fs-5">Order</p>
-                    </div>
-                    <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                    <div>
-                        <h3 class="fs-2">%25</h3>
-                        <p class="fs-5">Increase</p>
-                    </div>
-                    <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                </div>
-            </div>
-        </div>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
@@ -85,7 +43,7 @@
                             <td><img src="../img/<%= e.info %>" width="60px" height="40px"></td>
                             <td ><%= e.updatedAt.toLocaleDateString() %> </td>
                             <td>
-                                <button onclick= <%= "del("+e.id_order+")" %>  type="button" class="btn btn-danger">Tolak</button>
+                                <a href="/admin/api/btltransaksi/<%= e.user.id_user %>/<%= e.produk.id_barang %>/<%= e.id_order %> /<%= e.info %> "   type="button" class="btn btn-danger">Tolak</a>
                                 <button type="submit" class="btn btn-success" onclick=<%= "konfirmasi("+e.id_order+")"  %> >Terima</button>                        
                             </td>
                         </tr>
@@ -98,22 +56,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const konfirmasi = (id) =>{
-        alert(`Data Pemesanan dengan id ${id} Berhasil Ditambahkan`)
-    }
-    const del = (id) =>{
-        const konfirmasi = confirm('Are you delete id : ' +id);
-        if (konfirmasi == true){
-            axios.delete('/admin/api/order/'+id).then(result =>{
-            location.reload()
-            }).catch(err =>{
-                alert('error : '+err)
-            });
-        }
-        else{
-            alert("gagal")
-        }
-    }
     var el = document.getElementById("wrapper");
     var toggleButton = document.getElementById("menu-toggle");
     toggleButton.onclick = function () {

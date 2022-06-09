@@ -12,36 +12,36 @@
 <body>
     <%- include('../template/nav.ejs') %>
     <div class="container-fluid px-4">
-        <a href="/admin/produk/create" class="btn btn-primary" style="margin-top: 5px;margin-bottom: 10px;">Tambah Produk</a>
+        <a href="/admin/pemasukan/pproduk" class="btn btn-primary" style="margin-top: 5px;margin-bottom: 10px;">Tambah Produk</a>
         <table class="table table-bordered border-dark table-hover bg">
             <thead class="bg-light">
               <tr>
                 <th scope="col">id</th>
+                <th scope="col">Nama Pembeli</th>
+                <th scope="col">Alamat</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Deskripsi</th>
                 <th scope="col">Harga</th>
-                <th scope="col">Status</th>
-                <th scope="col">Gambar</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Total</th>
+                <th scope="col">Pembayaran</th>
+                <th scope="col">Tanggal</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-                <% Produk.forEach(e => { %>
+                <% Pemasukan.forEach(e => { %>
                     <tr>
-                        <td><%= e.id_barang %> </td>
-                        <th><%= e.nama_barang %> </th>
-                        <td><%= e.deskripsi %> </td>
+                        <td><%= e.id_pemasukan %> </td>
+                        <th><%= e.nama_pembeli %> </th>
+                        <td><%= e.alamat %> </td>
+                        <td><%= e.nama_barang %> </td>
                         <td><%= e.harga %> </td>
-                        <td><% if (e.status === 1) { %>
-                            Tersedia
-                        <% } else { %>
-                            Kosong
-                        <% } %> 
-                         </td>
-                        <td><img src="../img/<%= e.gambar %>" width="60px" height="60px"></td>
+                        <td><%= e.jumlah %> </td>
+                        <td><%= e.jumlah * e.harga %> </td>
+                        <td><img src="../../img/<%= e.info %>" width="60px" height="60px"></td>
+                        <td ><%= e.updatedAt.toLocaleDateString() %> </td>
                         <td>
-                            <a href="/admin/produk/edit/<%= e.id_barang %> " class="btn btn-warning">Edit</a>
-                            <!-- <a href="/admin/api/produk/delete/<%= e.id_barang %> " class="btn btn-danger">Delete</a> -->
+                            <a href="/admin/pemasukan/edit/<%= e.id_pemasukan %> " class="btn btn-warning">Edit</a>
                         </td>
                     </tr>
                 <% }) %>
@@ -58,6 +58,6 @@
     toggleButton.onclick = function () {
         el.classList.toggle("toggled");
     };
-    const change = document.getElementById('title').innerHTML = "Produk";
+    const change = document.getElementById('title').innerHTML = "Pemasukan";
 </script>
 </html>

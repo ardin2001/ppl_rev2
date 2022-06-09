@@ -34,7 +34,7 @@
                   <span class="card-text">Alamat        : <%= e.alamat %> </span><br>
                   <span class="card-text">Bukti Pembayaran : <a href="/user/order/image/<%= e.id_order %> ">Klik</a> </span><br>
                 </div>
-                <a href="/user/api/order/<%= e.id_order %> " class="btn btn-danger" style="margin-top: 10px;">Batal Transaksi</a>
+                <a href="/user/api/btltransaksi/<%= e.id_order %>/<%= e.id_user %>/<%= e.id_barang %>/<%= e.info %>" class="btn btn-danger" style="margin-top: 10px;">Batal Transaksi</a>
                 <a href="/user/order/edit/<%= e.id_order %> " class="btn btn-warning" style="margin-top: 10px;">Ubah Transaksi</a>
               </div>
             </div>

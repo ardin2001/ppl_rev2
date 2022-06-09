@@ -6,6 +6,7 @@ import Produk from '../models/produk.js';
 import Order from '../models/order.js';
 import Transaksi from '../models/transaksi.js';
 import Admin from '../models/admin.js';
+import Kembalian from '../models/kembalian.js';
 import admin_produk_router from '../routers/admin/produk.js';
 import admin_order_router from '../routers/admin/order.js';
 import admin_transaksi_router from '../routers/admin/transaksi.js';
@@ -13,7 +14,10 @@ import admin_dashboard_router from '../routers/admin/dashboard.js';
 import admin_user_router from './admin/user.js';
 import admin_profile_router from './admin/profile.js';
 import admin_rating_router from './admin/rating.js';
+import admin_kembalian_router from './admin/kembalian.js';
+import admin_pemasukan_router from './admin/pemasukan.js';
 import ac from '../controllers/admin.js';
+import Pemasukan from '../models/pemasukan.js';
 
 const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
 
@@ -39,6 +43,8 @@ router.use('/dashboard',admin_dashboard_router);
 router.use('/user',admin_user_router);
 router.use('/profile',admin_profile_router);
 router.use('/ulasan',admin_rating_router);
+router.use('/kembalian',admin_kembalian_router);
+router.use('/pemasukan',admin_pemasukan_router);
 
 // ======= api admin ========== //
 
@@ -137,5 +143,50 @@ router.post('/api/transaksi/:idorder/:idproduk/:nama/:telp/:alamat/:namabarang/:
         .then(result => res.redirect('/admin/order'))
     }
 )
+
+//=== api batak transaksi ===//
+router.get('/api/btltransaksi/:iduser/:idbarang/:id_order/:buktitf',(req,res,next) =>{
+    Kembalian.create({
+        id_user : req.params.iduser,
+        id_barang : req.params.idbarang,
+        info : req.params.buktitf
+    }),next()
+    },(req,res,next) =>{
+        Order.destroy({where : {id_order : req.params.id_order}})
+        .then(result => res.redirect('/admin/order'))
+    }
+)
+router.post('/api/btltransaksi/update/:id',upload.single('gambar'),(req,res) =>{
+    Kembalian.update({
+        bukti_kembalian : req.file.filename
+    },{where :{id_kembalian : req.params.id}}
+    ).then(result =>{
+        res.redirect('/admin/kembalian')
+    })
+})
+
+//=== api pemasukan ===//
+router.post('/api/pemasukan/create/:nama/:harga',upload.single('info'),(req,res) =>{
+    Pemasukan.create({
+        nama_pembeli : 'Pembeli Offline',
+        no_telp : '000000000000',
+        alamat : 'Offline',
+        nama_barang : req.params.nama,
+        harga : req.params.harga,
+        jumlah : req.body.jumlah,
+        info : req.file.filename
+    }).then(result =>{
+        res.redirect('/admin/pemasukan')
+    })
+})
+router.post('/api/pemasukan/update/:id',upload.single('info'),(req,res) =>{
+    Pemasukan.update({
+        jumlah : req.body.jumlah,
+        info : req.file.filename
+    },{where :{id_pemasukan : req.params.id}}
+    ).then(result =>{
+        res.redirect('/admin/pemasukan')
+    })
+})
 
 export default router;

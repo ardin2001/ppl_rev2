@@ -7,6 +7,8 @@ import Order from '../models/order.js';
 import Transaksi from '../models/transaksi.js';
 import Admin from '../models/admin.js';
 import Kembalian from '../models/kembalian.js';
+import Pemasukan from '../models/pemasukan.js';
+import Pengeluaran from '../models/pengeluaran.js';
 import admin_produk_router from '../routers/admin/produk.js';
 import admin_order_router from '../routers/admin/order.js';
 import admin_transaksi_router from '../routers/admin/transaksi.js';
@@ -16,8 +18,8 @@ import admin_profile_router from './admin/profile.js';
 import admin_rating_router from './admin/rating.js';
 import admin_kembalian_router from './admin/kembalian.js';
 import admin_pemasukan_router from './admin/pemasukan.js';
+import admin_pengeluaran_router from './admin/pengeluaran.js';
 import ac from '../controllers/admin.js';
-import Pemasukan from '../models/pemasukan.js';
 
 const uploadFolder ='C:/Users/ardin/Desktop/ppl2/views/img';
 
@@ -45,6 +47,7 @@ router.use('/profile',admin_profile_router);
 router.use('/ulasan',admin_rating_router);
 router.use('/kembalian',admin_kembalian_router);
 router.use('/pemasukan',admin_pemasukan_router);
+router.use('/pengeluaran',admin_pengeluaran_router);
 
 // ======= api admin ========== //
 
@@ -186,6 +189,35 @@ router.post('/api/pemasukan/update/:id',upload.single('info'),(req,res) =>{
     },{where :{id_pemasukan : req.params.id}}
     ).then(result =>{
         res.redirect('/admin/pemasukan')
+    })
+})
+
+//=== api pemasukan ===//
+router.post('/api/pengeluaran/create',upload.single('pembayaran'),(req,res) =>{
+    Pengeluaran.create({
+        nama_penjual : req.body.nama_penjual,
+        no_telp : req.body.telp,
+        alamat : req.body.alamat,
+        nama_barang : req.body.nama_produk,
+        harga : req.body.harga,
+        jumlah : req.body.jumlah,
+        info : req.file.filename
+    }).then(result =>{
+        res.redirect('/admin/pengeluaran')
+    })
+})
+router.post('/api/pengeluaran/update/:id',upload.single('pembayaran'),(req,res) =>{
+    Pengeluaran.update({
+        nama_penjual : req.body.nama_penjual,
+        no_telp : req.body.telp,
+        alamat : req.body.alamat,
+        nama_barang : req.body.nama_produk,
+        harga : req.body.harga,
+        jumlah : req.body.jumlah,
+        info : req.file.filename
+    },{where : {id_pengeluaran : req.params.id}}
+    ).then(result =>{
+        res.redirect('/admin/pengeluaran')
     })
 })
 

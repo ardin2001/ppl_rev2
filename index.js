@@ -12,6 +12,7 @@ import Transaksi from './models/transaksi.js';
 import Rating from './models/rating.js';
 import Kembalian from './models/kembalian.js';
 import Pemasukan from './models/pemasukan.js';
+import Pengeluaran from './models/pengeluaran.js';
 const app = express();
 const conn = mysql2.createConnection({
     host : 'localhost',
@@ -34,7 +35,7 @@ app.use('/',root_router);
 app.use('/admin',admin_router);
 app.use('/user',user_router);
 app.get('/create',(req,res) =>{
-    Pemasukan.sync();
+    Pengeluaran.sync();
     res.end('succes');
 })
 app.listen(3000,() => {

@@ -1,24 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <b class="navbar-brand" href="#">E-CHEST</b>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item" style="padding-right: 10px;">
             <a class="nav-link active" aria-current="page" href="/user/produk">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/user/order/<%= user.id_user %> ">Order</a>
+          <li class="nav-item" style="padding-right: 10px;">
+            <a class="nav-link active" href="/user/order/<%= user.id_user %> ">Order</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/user/transaksi/<%= user.nama_pembeli %>">Riwayat Pemesanan</a>
+          <li class="nav-item" style="padding-right: 10px;">
+            <a class="nav-link active" href="/user/kembalian/<%= user.id_user %> ">kembalian</a>
+          </li>
+          <li class="nav-item" style="padding-right: 10px;">
+            <a class="nav-link active" href="/user/transaksi/<%= user.nama_pembeli %>">Riwayat Pemesanan</a>
           </li>
         </ul>
-        <div class="d-flex btn-group">
+        <div class="d-flex btn-group" style="margin-right: 30px;">
           <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; text-decoration: none;"><%= user.username %></a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="margin-right: 30px;">
             <li><a class="dropdown-item" href="/user/profile/<%= user.id_user %> ">Profile</a></li>
             <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
           </ul>

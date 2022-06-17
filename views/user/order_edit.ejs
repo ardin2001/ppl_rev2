@@ -30,7 +30,8 @@
                   <!-- <p>Jumlah barang :<input type="number" id="jumlah" name="jumlah" oninput="hitung()" style="width: 170px;"></p>
                   <p class="card-text" id="total"></p> -->
                   <p>Bukti Transfer : <input type="file" name="gambar" accept="image/*" style="width: 180px;"></p>
-                  <button type="submit" class="btn btn-warning" style="margin-left: 8rem;">Simpan</button>
+                  <a href="/user/order/<%= Order.produk.id_barang %>" type="button" class="btn btn-danger" style="margin-left: 80px;">Batal</a>
+                  <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
               </div><br>
             </div>

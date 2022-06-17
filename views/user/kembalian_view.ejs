@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <style>
+      body{
+          background-color: rgb(234, 234, 234);
+      }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../template/nav_user.ejs') %>
+    <div class="container-fluid px-4">
+        <main>
+            <% Kembalian.forEach(e => { %>
+                <div class="d-flex justify-content-center">
+                    <div class="card mb-2" style="max-width: 650px;">
+                      <div class="row g-0">
+                        <div class="col-md-5">
+                          <img src="../../../img/<%=e.produk.gambar %>" class="img-fluid rounded-start" alt="..." style="width: 450px;height: 240px;">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <h5 class="card-title"><%= e.produk.nama_barang %> </h5>
+                            <div>
+                              <span class="card-text">Harga Barang  : <%= e.produk.harga %> </span><br>
+                              <span class="card-text">Jumlah Barang  : <%= 7 %> </span><br>
+                              <span class="card-text">Total Harga  : <%= 11111111 %> </span><br>
+                              <span class="card-text">Nama Pembeli  : <%= e.user.nama_pembeli %> </span><br>
+                              <span class="card-text">Bukti Pembayaran : <a href="/user/kembalian/pembayaran/<%= e.id_kembalian %> ">Klik</a> </span><br>
+                              <span class="card-text">Bukti Kembalian : <a href="/user/kembalian/image/<%= e.id_kembalian %> ">Klik</a> </span><br>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            <% }) %>
+        </main>
+    </div>
+</body>
+</html>

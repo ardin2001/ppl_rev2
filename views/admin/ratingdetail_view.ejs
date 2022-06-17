@@ -12,18 +12,26 @@
 <body>
     <%- include('../template/nav.ejs') %>
     <div class="container-fluid px-4">
-        <main>
-            <% Rating.forEach(e => { %>
-                <div class="card col-4 mb-2" style="margin: auto;">
-                    <h4 class="card-header"><%= e.user.nama_pembeli %> </h4>
-                    <div class="card-body">
-                      <!-- <h5 class="card-title">Rating : <%= e.bintang %> </h5> -->
-                      <p class="card-text">Pesan : <%= e.bintang %> </p>
-                      <p class="card-text">Pesan : <%= e.pesan %> </p>
-                    </div>
-                  </div>
-            <% }) %>
-        </main>
+        <table class="table table-bordered border-dark table-hover bg">
+            <thead class="bg-light">
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nama Pembeli</th>
+                <th scope="col">Pesan</th>
+                <th scope="col">Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% Rating.forEach(e => { %>
+                    <tr>
+                      <td><%= e.id_user %> </td>
+                      <th><%= e.user.nama_pembeli %> </th>
+                      <td><%= e.pesan %> </td>
+                      <td><%= e.bintang %> </td>
+                  </tr>
+              <% }) %>
+            </tbody>
+        </table>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>

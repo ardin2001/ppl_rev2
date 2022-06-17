@@ -15,7 +15,7 @@
 <body>
   <%- include('../template/nav_user.ejs') %>
   <form action="/user/api/order/<%= Produk.id_barang %>/<%= user.id_user %>" method="post" enctype="multipart/form-data">
-    <div class="container"  style="margin-top: 40px;">
+    <div class="container"  style="margin-top: 20px;">
       <div class="row d-flex justify-content-evenly">
         <div class="card" style="width: 22rem; padding: 15px; margin: 3px;">
           <img src="../../../img/<%= Produk.gambar %> " class="card-img-top" width="200px" height="300px">
@@ -35,7 +35,7 @@
             <p class="card-text" id="total"></p>
           </div>
           <button type="submit" class="btn btn-success" >Order</button>
-          <!-- <button onclick=<%= "create("+[user.id_user,Produk.id_barang,Produk.harga]+")"  %> type="button" class="btn btn-success" >Order</button> -->
+          <a href="/user/produk" type="button" class="btn btn-danger" id="submit" style="margin-top: 10px;">Batal</a>
         </div>
       </div>
     </div>

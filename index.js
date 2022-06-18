@@ -4,14 +4,6 @@ import mysql2 from 'mysql2';
 import root_router from './routers/root.js';
 import admin_router from './routers/admin.js';
 import user_router from './routers/user.js';
-import User from './models/user.js';
-import Admin from './models/admin.js';
-import Order from './models/order.js';
-import Produk from './models/produk.js';
-import Transaksi from './models/transaksi.js';
-import Rating from './models/rating.js';
-import Kembalian from './models/kembalian.js';
-import Pemasukan from './models/pemasukan.js';
 import Pengeluaran from './models/pengeluaran.js';
 const app = express();
 const conn = mysql2.createConnection({
@@ -34,6 +26,7 @@ app.set('view engine','ejs')
 app.use('/',root_router);
 app.use('/admin',admin_router);
 app.use('/user',user_router);
+
 app.get('/create',(req,res) =>{
     Pengeluaran.sync();
     res.end('succes');

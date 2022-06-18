@@ -31,9 +31,12 @@
             <label for="exampleInputEmail1" class="form-label">Jumlah Barang</label>
             <input type="number" class="form-control mb-3" id="jumlah" placeholder="Masukkan jumlah barang..." oninput="hitung()" name="jumlah">
             <label for="exampleInputEmail1" class="form-label">Bukti Transfer</label>
-            <input type="file" class="form-control mb-3" id="bukti_tf" name="gambar">
-            <p class="card-text" id="total"></p>
+            <input type="file" class="form-control mb-3" id="bukti_tf" name="gambar" accept="image/*">            
           </div>
+          <ul class="list-group list-group-flush" style="padding-bottom: 10px;">
+            <li class="list-group-item" id="hargaproduk"><p class="card-text text-danger" style="font-weight: bold;">No Rek : 000000000</p></li>
+            <li class="list-group-item" id="hargaproduk"><p class="card-text" id="total" style="font-weight: bold;"></p></li>
+          </ul>
           <button type="submit" class="btn btn-success" >Order</button>
           <a href="/user/produk" type="button" class="btn btn-danger" id="submit" style="margin-top: 10px;">Batal</a>
         </div>

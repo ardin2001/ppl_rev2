@@ -35,8 +35,9 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">alamat</label>
                     <input type="text" class="form-control" id="image" name="alamat" value="<%= Admin.alamat %>">
-                </div>                
-                <button type="submit" class="btn btn-primary" id="submit" style="margin-left: 5rem;">Submit</button>
+                </div>  
+                <a href="/admin/profile/<%= admin.id_admin %>" type="button" class="btn btn-danger" id="submit" style="margin-left: 60px;">Batal</a>              
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
               </form>
             </div>
           </div>
